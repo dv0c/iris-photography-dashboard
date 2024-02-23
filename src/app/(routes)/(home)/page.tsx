@@ -1,11 +1,11 @@
-import Page from "@/components/Page";
-import Sidebar from "@/components/sidebar";
+import { getAuthSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main className="flex gap-5 mx-auto max-w-5xl">
-      <Sidebar />
-      <Page>a</Page>
-    </main>
-  );
+export default async function Home() {
+
+  const session = await getAuthSession();
+  if (!session?.user.id) {
+    return redirect("/auth");
+  }
+  return redirect("/dashboard");
 }

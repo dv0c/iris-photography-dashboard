@@ -11,15 +11,12 @@ export const metadata: Metadata = {
   description: "Iris Photography Team Dashboard",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getAuthSession();
-  if (!session?.user.id) {
-    return redirect("/auth");
-  }
+
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
